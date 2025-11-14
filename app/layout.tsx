@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mitho Masala",
-  description: "Delight in Every Spice - Mitho Masala",
+  title: "Deep Masala",
+  description: "Delight in Every Spice - DeepS Masala",
 };
 
 export default function RootLayout({
