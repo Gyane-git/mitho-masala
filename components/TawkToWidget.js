@@ -1,37 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { apiRequest } from "@/utils/ApiSafeCalls";
+import { useState } from "react";
 import Image from "next/image";
 
 export default function TawkToWidget() {
-  const [settings, setSettings] = useState({
-    whatsapp: "",
-    viber: "9762875051", // fallback if API fails
-  });
-
   const [showSelection, setShowSelection] = useState(false);
 
-  useEffect(() => {
-    const fetchSettings = async () => {
-      const response = await apiRequest("/settings", false);
-      if (response.success) {
-        const { whatsapp } = response.settings;
-        const number = whatsapp?.value || "98"; // fallback number
-        console.log("Fetched settings:", number);
+  const settings = {
+    whatsapp: "9821212332",
+    viber: "9821212332",
+  };
 
-        setSettings({
-          whatsapp: number,
-          viber: number, // match viber with whatsapp
-        });
-      } else {
-        console.log("Failed to fetch settings:", response.message);
-      }
-    };
-    fetchSettings();
-  }, []);
-
-  const message = "Hello! I'm interested in your products !";
+  const message = "Hello! I'm interested in your products!";
 
   const handleChatIconClick = (e) => {
     e.preventDefault();
@@ -39,36 +19,27 @@ export default function TawkToWidget() {
   };
 
   const handleWhatsAppClick = () => {
-    if (settings.whatsapp) {
-      window.open(
-        `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(message)}`,
-        "_blank",
-        "noopener,noreferrer"
-      );
-      setShowSelection(false);
-    }
+    window.open(
+      `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(message)}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+    setShowSelection(false);
   };
 
   const handleViberClick = () => {
-  if (settings.viber) {
-    // Ensure international format, e.g., +9779812345678
     const phone = settings.viber.startsWith("+")
       ? settings.viber
-      : `+${settings.viber}`;
-
+      : `+977${settings.viber}`; // ensure international format
     window.open(
       `viber://chat?number=${encodeURIComponent(phone)}`,
       "_blank",
       "noopener,noreferrer"
     );
     setShowSelection(false);
-  }
-};
-
-
-  const closeSelection = () => {
-    setShowSelection(false);
   };
+
+  const closeSelection = () => setShowSelection(false);
 
   return (
     <>
@@ -78,8 +49,8 @@ export default function TawkToWidget() {
           onClick={handleChatIconClick}
           className="hover:scale-110 transform text-white p-3 rounded-full flex items-center justify-center transition-all duration-300 animate-bounce"
         >
-          <Image
-            src="/assets/chatboticon.webp"
+          <img
+            src="/images/chatboticon.webp"
             alt="ChatApp"
             className="w-20 h-20 pointer-events-none -mb-2"
           />
@@ -110,7 +81,7 @@ export default function TawkToWidget() {
                 className="w-full flex items-center space-x-3 p-3 bg-green-50 hover:bg-green-100 rounded-lg border border-green-200 transition-colors duration-200"
               >
                 <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                  <Image src="/assets/whatsapp.svg" alt="WhatsApp Icon" className="w-6 h-6" />
+                  <img src="/images/whatsapp.svg" alt="WhatsApp Icon" className="w-6 h-6" />
                 </div>
                 <div className="text-left">
                   <div className="font-medium text-gray-800">WhatsApp</div>
@@ -124,7 +95,7 @@ export default function TawkToWidget() {
                 className="w-full flex items-center space-x-3 p-3 bg-purple-50 hover:bg-purple-100 rounded-lg border border-purple-200 transition-colors duration-200"
               >
                 <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
-                  <Image src="/assets/viber1.webp" alt="Viber Icon" className="w-6 h-6" />
+                  <img src="/images/viber1.webp" alt="Viber Icon" className="w-6 h-6" />
                 </div>
                 <div className="text-left">
                   <div className="font-medium text-gray-800">Viber</div>
@@ -143,31 +114,3 @@ export default function TawkToWidget() {
     </>
   );
 }
-
-
-
-//tawk to widget
-// export default function TawkToWidget() {
-//   // const [isTawkOpen, setIsTawkOpen] = useState(false);
-
-//   useEffect(() => {
-//     var Tawk_API = Tawk_API || {},
-//       Tawk_LoadStart = new Date();
-//     const s1 = document.createElement("script");
-//     s1.async = true;
-//     s1.src = "https://embed.tawk.to/686bb0dca86aec190ca6b4f4/1ivialoc3";
-//     s1.charset = "UTF-8";
-//     s1.setAttribute("crossorigin", "*");
-//     document.body.appendChild(s1);
-
-//     return () => {
-//       // Remove existing Tawk.to iframe when component unmounts
-//       const tawkIframe = document.querySelector("iframe[src*='tawk.to']");
-//       if (tawkIframe) {
-//         tawkIframe.remove();
-//       }
-//     };
-//   }, []);
-
-//   return null;
-// }

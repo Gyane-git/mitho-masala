@@ -33,11 +33,11 @@ export default function Footer() {
             <div className="flex items-center space-x-3">
               <div className="bg-linear-to-br from-orange-500 to-red-600 rounded-full p-2">
                 <div className="w-10 h-10 flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">M</span>
+                  <span className="text-white font-bold text-xl">D</span>
                 </div>
               </div>
               <div>
-                <h2 className="text-white text-xl font-bold">Mitho Masala</h2>
+                <h2 className="text-white text-xl font-bold">Deep Masala</h2>
                 <p className="text-orange-400 text-xs">Pure Taste. Real Tradition.</p>
               </div>
             </div>
