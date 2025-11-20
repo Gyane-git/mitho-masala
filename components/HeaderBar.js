@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { Menu, X, LogInIcon, UserCog } from "lucide-react";
 import Image from "next/image";
@@ -18,12 +19,22 @@ export default function HeaderBar() {
   }, []);
 
   const navLinks = [
-    { name: "About", href: "/about" },
+    { name: "About", href: "/" },
     { name: "Products", href: "/products" },
     { name: "Combo", href: "/combo" },
     { name: "Contact", href: "/contact" },
     { name: "Business", href: "/business/account" },
   ];
+
+  // Smooth scroll to section
+  const handleScrollTo = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const yOffset = -80; // header height offset
+      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -45,15 +56,25 @@ export default function HeaderBar() {
 
             {/* Center Nav */}
             <nav className="hidden md:flex items-center space-x-8 mx-auto">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-gray-700 font-medium hover:text-orange-500 transition"
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) =>
+                link.name === "About" ? (
+                  <button
+                    key={link.name}
+                    onClick={() => handleScrollTo("about")}
+                    className="text-gray-700 font-medium hover:text-orange-500 transition"
+                  >
+                    {link.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="text-gray-700 font-medium hover:text-orange-500 transition"
+                  >
+                    {link.name}
+                  </Link>
+                )
+              )}
             </nav>
 
             {/* Right Side Buttons */}
@@ -87,16 +108,29 @@ export default function HeaderBar() {
           {/* Mobile Menu */}
           {isMenuOpen && (
             <div className="md:hidden bg-white shadow-md rounded-lg p-4 space-y-4 mt-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="block text-gray-800 font-medium hover:text-orange-500 transition"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) =>
+                link.name === "About" ? (
+                  <button
+                    key={link.name}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      handleScrollTo("about");
+                    }}
+                    className="block text-gray-800 font-medium hover:text-orange-500 transition"
+                  >
+                    {link.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="block text-gray-800 font-medium hover:text-orange-500 transition"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                )
+              )}
 
               {!isLoggedIn ? (
                 <button

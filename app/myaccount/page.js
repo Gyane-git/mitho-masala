@@ -31,8 +31,8 @@ export default function MyAccountPage() {
   const menuItems = [
     { id: 'manage', icon: User, label: 'Manage My Account', route: '/myaccount' },
     { id: 'address', icon: MapPin, label: 'Address Book', route: 'myaccount/address' },
-    { id: 'orders', icon: List, label: 'My Orders', route: '/order' },
-    { id: 'complaint', icon: RotateCcw, label: 'Complaint', route: '/complaint' }
+    { id: 'orders', icon: List, label: 'My Orders', route: 'myaccount/order-status' },
+    { id: 'complaint', icon: RotateCcw, label: 'Complaint', route: 'myaccount/complaint' }
   ];
 
   const handleLogout = () => {
@@ -118,7 +118,7 @@ export default function MyAccountPage() {
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold text-gray-900">Address Book</h3>
                   <Link
-                    href="/address/edit"
+                    href="myaccount/address/edit"
                     className="text-blue-600 text-sm font-medium hover:text-blue-700"
                   >
                     EDIT
@@ -140,7 +140,7 @@ export default function MyAccountPage() {
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold text-gray-900">Default Billing Address</h3>
                   <Link
-                    href="/address/billing/edit"
+                    href="myaccount/address/edit"
                     className="text-blue-600 text-sm font-medium hover:text-blue-700"
                   >
                     EDIT

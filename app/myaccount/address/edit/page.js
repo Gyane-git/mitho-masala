@@ -66,7 +66,7 @@ export default function EditAddressBookPage({ existingData, onClose, onSave }) {
               name="name"
               value={formData.name}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg  text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your full name"
             />
           </div>
@@ -81,7 +81,7 @@ export default function EditAddressBookPage({ existingData, onClose, onSave }) {
               name="phone"
               value={formData.phone}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="9813074888"
             />
           </div>
@@ -95,7 +95,7 @@ export default function EditAddressBookPage({ existingData, onClose, onSave }) {
               name="addressType"
               value={formData.addressType}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="Home">Home</option>
               <option value="Office">Office</option>
@@ -112,7 +112,7 @@ export default function EditAddressBookPage({ existingData, onClose, onSave }) {
               name="province"
               value={formData.province}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="">Select Province</option>
               {provinces.map((prov) => (
@@ -131,7 +131,7 @@ export default function EditAddressBookPage({ existingData, onClose, onSave }) {
               value={formData.city}
               onChange={handleInputChange}
               disabled={!formData.province}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
             >
               <option value="">Select City</option>
               {formData.province &&
@@ -151,7 +151,7 @@ export default function EditAddressBookPage({ existingData, onClose, onSave }) {
               value={formData.area}
               onChange={handleInputChange}
               disabled={!formData.city}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
             >
               <option value="">Select Area</option>
               {formData.city &&
@@ -171,7 +171,7 @@ export default function EditAddressBookPage({ existingData, onClose, onSave }) {
               value={formData.streetAddress}
               onChange={handleInputChange}
               rows={3}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="House/Building number, Street name, Landmark"
             />
           </div>

@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+//import HeaderBar from "@/components/HeaderBar"; // import the header
+
 
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -72,8 +74,10 @@ export default function HomePage() {
 
   return (
     <div className="bg-white">
-      {/* Hero Slider Section */}
+      {/* Header */}
+      {/* <HeaderBar /> */}
 
+      {/* Hero Slider Section */}
       <section className="relative h-screen w-full overflow-hidden">
         {slides.map((slide, index) => (
           <div
@@ -83,7 +87,6 @@ export default function HomePage() {
             }`}
             aria-hidden={index === currentSlide ? "false" : "true"}
           >
-            {/* parent must be position: relative for Image fill to work; section is relative */}
             <Image
               src={slide}
               alt={`Slide ${index + 1}`}
@@ -128,7 +131,7 @@ export default function HomePage() {
       </section>
 
       {/* About Us Section */}
-      <section className="py-16 px-4 md:px-8 bg-gray-50">
+      <section id="about" className="py-16 px-4 md:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="grid grid-cols-2 gap-4">
@@ -140,9 +143,7 @@ export default function HomePage() {
                   className="object-cover rounded-lg shadow-md"
                 />
               </div>
-
               <div className="relative w-full h-48 md:h-64">
-                {/* second about image - replace with your actual image path */}
                 <Image
                   src="/images/about2.jpg"
                   alt="About image 2"
@@ -151,7 +152,6 @@ export default function HomePage() {
                 />
               </div>
             </div>
-
             <div>
               <h2 className="text-4xl font-bold text-gray-900 mb-6">About Us</h2>
               <p className="text-gray-700 mb-4 leading-relaxed">
@@ -198,7 +198,6 @@ export default function HomePage() {
                 index % 2 === 0 ? "" : "md:grid-flow-dense"
               }`}
             >
-              {/* Image column */}
               <div
                 className={`relative w-full h-64 md:h-96 ${
                   product.imagePosition === "right" ? "md:col-start-2" : ""
@@ -212,7 +211,6 @@ export default function HomePage() {
                 />
               </div>
 
-              {/* Text column */}
               <div
                 className={`${
                   product.imagePosition === "right"
