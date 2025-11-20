@@ -1,118 +1,128 @@
 "use client";
-import { useState } from 'react';
-import { Menu, X, ShoppingCart, Phone } from 'lucide-react';
-import Image from 'next/image';
-import PromoBannerSlider from './Offer';
-import Link from 'next/link';
+import { useState, useEffect } from "react";
+import { Menu, X, LogInIcon, UserCog } from "lucide-react";
+import Image from "next/image";
+import PromoBannerSlider from "./Offer";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 export default function HeaderBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
 
+  // Fake auth check (replace with real logic)
+  useEffect(() => {
+    const user = localStorage.getItem("auth");
+    setIsLoggedIn(!!user);
+  }, []);
 
   const navLinks = [
-   
-    { name: 'About', href: '/about' },
-    { name: 'Products', href: '/products' },
-    { name: 'Combo', href: '/combo' },
-    { name: 'Contact', href: '/contact' },
-    { name: 'Business', href: '/business/account' },
-    
+    { name: "About", href: "/about" },
+    { name: "Products", href: "/products" },
+    { name: "Combo", href: "/combo" },
+    { name: "Contact", href: "/contact" },
+    { name: "Business", href: "/business/account" },
   ];
 
   return (
     <>
-    <PromoBannerSlider />
-    
-    <header className="sticky top-0 z-50 w-full bg-transparent shadow-lg">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo & Brand */}
-          <div className="flex items-center space-x-3">
-            <div className=" ">
-<Link href="/" className="w-40 h-15 overflow-hidden flex items-center justify-center">
-  <Image
-    src="/images/logo1.png"
-    alt="Logo"
-    width={60}
-    height={60}
-    className="object-cover w-full h-full"
-  />
-</Link>     </div>
-            {/* <div className="text-white">
-              <h1 className="text-2xl font-bold tracking-tight">Deep Masala</h1>
-              <p className="text-xs text-orange-100">Pure Taste. Real Tradition.</p>
-            </div> */}
-          </div>
+      <PromoBannerSlider />
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-white hover:text-yellow-200 transition-colors duration-200 font-medium text-sm uppercase tracking-wide"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
+      <header className="sticky top-0 z-50 w-full bg-white shadow-lg">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <Link href="/" className="w-40 flex items-center justify-center">
+              <Image
+                src="/images/logo1.png"
+                alt="Logo"
+                width={60}
+                height={60}
+                className="object-cover"
+              />
+            </Link>
 
-          {/* Right Section - Cart & Contact */}
-          <div className="hidden md:flex items-center space-x-4">
-            <a
-              href="tel:+977"
-              className="flex items-center space-x-2 bg-white text-orange-600 px-4 py-2 rounded-full hover:bg-yellow-100 transition-all duration-200 font-semibold"
+            {/* Center Nav */}
+            <nav className="hidden md:flex items-center space-x-8 mx-auto">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-gray-700 font-medium hover:text-orange-500 transition"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Right Side Buttons */}
+            <div className="hidden md:flex items-center space-x-4">
+              {!isLoggedIn ? (
+                <button
+                  onClick={() => router.push("/account/login")}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500 text-white font-medium hover:bg-orange-600 transition"
+                >
+                  <LogInIcon size={18} /> Login
+                </button>
+              ) : (
+                <button
+                  onClick={() => router.push("/account")}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white font-medium hover:bg-gray-900 transition"
+                >
+                  <UserCog size={18} /> My Account
+                </button>
+              )}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden text-gray-800"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <Phone size={16} />
-              <span className="text-sm">Call Us</span>
-            </a>
-            <button className="relative bg-white text-orange-600 p-3 rounded-full hover:bg-yellow-100 transition-all duration-200 shadow-md">
-              <ShoppingCart size={20} />
-              <span className="absolute -top-1 -right-1 bg-yellow-400 text-orange-800 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                0
-              </span>
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-white p-2 hover:bg-orange-500 rounded-lg transition-colors"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-orange-800 rounded-lg my-2 shadow-xl animate-in slide-in-from-top">
-            <nav className="flex flex-col space-y-1 p-4">
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden bg-white shadow-md rounded-lg p-4 space-y-4 mt-2">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
                   href={link.href}
-                  className="text-white hover:bg-orange-700 px-4 py-3 rounded-lg transition-colors font-medium"
+                  className="block text-gray-800 font-medium hover:text-orange-500 transition"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
-              <div className="border-t border-orange-600 my-2"></div>
-              <a
-                href="tel:+977"
-                className="flex items-center space-x-2 bg-white text-orange-600 px-4 py-3 rounded-lg hover:bg-yellow-100 transition-all font-semibold justify-center"
-              >
-                <Phone size={18} />
-                <span>Call Us</span>
-              </a>
-              <button className="flex items-center justify-center space-x-2 bg-yellow-400 text-orange-800 px-4 py-3 rounded-lg hover:bg-yellow-300 transition-all font-semibold">
-                <ShoppingCart size={18} />
-                <span>Cart (0)</span>
-              </button>
-            </nav>
-          </div>
-        )}
-      </div>
-    </header>
+
+              {!isLoggedIn ? (
+                <button
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    router.push("/account/login");
+                  }}
+                  className="w-full flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500 text-white font-medium hover:bg-orange-600 transition"
+                >
+                  <LogInIcon size={18} /> Login
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    router.push("/account");
+                  }}
+                  className="w-full flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-white font-medium hover:bg-gray-900 transition"
+                >
+                  <UserCog size={18} /> My Account
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      </header>
     </>
   );
 }

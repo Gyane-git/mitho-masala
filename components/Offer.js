@@ -13,7 +13,7 @@ const PromoBannerSlider = () => {
     },
     {
       icon: <Gift className="w-6 h-6" />,
-      text: "Free shipping on orders over $50",
+      text: "Free shipping on orders over Rs 5000",
       color: "bg-blue-500"
     },
     {
