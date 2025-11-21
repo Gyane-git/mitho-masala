@@ -4,6 +4,7 @@ import { useState } from "react";
 import SideHeaderBar from "@/components/admin-sidebar";
 import DashboardPage from "./dashboard/page";
 import AdminHeaderBar from "@/components/admin-HeaderBar";
+//import Sidebar from "../test/sidebar2";
 
 export default function AdminPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -28,6 +29,7 @@ export default function AdminPage() {
             overflow-y-auto h-full
           `}
         >
+          {/* <SideHeaderBar /> */}
           <SideHeaderBar />
         </aside>
 

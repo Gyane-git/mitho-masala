@@ -6,49 +6,24 @@ export default function AddCategoryPage() {
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState(null); // store file
-  const [preview, setPreview] = useState(null); // for image preview
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-      setPreview(URL.createObjectURL(file));
-    } else {
-      setImage(null);
-      setPreview(null);
-    }
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Prepare category object
     const newCategory = {
       name,
       slug,
       description,
-      image, // this is the File object
     };
 
     console.log("Category Submitted:", newCategory);
 
-    // TODO: Replace with API call (multipart/form-data)
-    // Example:
-    // const formData = new FormData();
-    // formData.append('name', name);
-    // formData.append('slug', slug);
-    // formData.append('description', description);
-    // formData.append('image', image);
-    // await fetch("/api/admin/categories", { method: "POST", body: formData });
+    // TODO: Replace with API call:
+    // await fetch("/api/admin/categories", {...})
 
-    // Reset form
     setName("");
     setSlug("");
     setDescription("");
-    setImage(null);
-    setPreview(null);
-
     alert("Category added successfully!");
   };
 
@@ -70,7 +45,7 @@ export default function AddCategoryPage() {
             placeholder="e.g. Spices, Masala, Flour"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full border text-black rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
@@ -85,8 +60,8 @@ export default function AddCategoryPage() {
             placeholder="e.g. spices, masala"
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
-            className="w-full border rounded-lg px-4 py-2 text-black outline-none focus:ring-2 focus:ring-blue-500"
-            
+            className="w-full border rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
         </div>
 
@@ -100,28 +75,8 @@ export default function AddCategoryPage() {
             rows={4}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full border rounded-lg px-4 text-black py-2 outline-none focus:ring-2 focus:ring-blue-500"
-          ></textarea>
-        </div>
-
-        {/* Image Upload */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">
-            Category Image
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
             className="w-full border rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          {preview && (
-            <img
-              src={preview}
-              alt="Preview"
-              className="mt-3 h-40 w-40 text-black object-cover rounded-lg border"
-            />
-          )}
+          ></textarea>
         </div>
 
         {/* Submit Button */}
