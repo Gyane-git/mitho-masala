@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import HeaderBar from "@/components/HeaderBar";
-import Footer from "@/components/Footer";
-import TawkToWidget from "@/components/TawkToWidget";
-
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,20 +18,11 @@ export const metadata: Metadata = {
   description: "Delight in Every Spice - DeepS Masala",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <HeaderBar />
-        {children}
-        <Footer/>
-        <TawkToWidget />
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );

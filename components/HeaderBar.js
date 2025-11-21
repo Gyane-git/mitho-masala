@@ -15,7 +15,7 @@ export default function HeaderBar() {
   // Fake auth check (replace with real logic)
   useEffect(() => {
     const user = localStorage.getItem("auth");
-    setIsLoggedIn(!!user);
+    // setIsLoggedIn(!user);
   }, []);
 
   const navLinks = [
